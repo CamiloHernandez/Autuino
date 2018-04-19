@@ -2,7 +2,8 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-#include <ConMotor.h>
+#include <Autuino.h>
+#include <UltraSonido.h>
 
 using namespace std;
 
@@ -35,33 +36,15 @@ const int distancia_para_giro = 15; //cm
 //*******************************Setup********************************//
 
 
-// Iniciando la librería ConMotor
-ConMotor motor(Pin_Motor_A1, Pin_Motor_A2, Pin_Motor_B1, Pin_Motor_B2);
+// Iniciando la librería Autuino
+Autuino motor(Pin_Motor_A1, Pin_Motor_A2, Pin_Motor_B1, Pin_Motor_B2);
 
 // Iniciando la librería Servo
 Servo servo;
 
-int UltraSonido(){
+// Iniciando la librería UltraSonido
 
-  digitalWrite(trigPin, LOW);
-
-  // Se detiene el sensor por 0.002 segundos
-  delayMicroseconds(2);
-
-  digitalWrite(trigPin, HIGH);
-
-  // Se detiene el sensor por 0.01 segundos
-  delayMicroseconds(10);
-
-  digitalWrite(trigPin, LOW);
-
-  duracion = pulseIn(echoPin, HIGH);
-
-  //Ecuación para calcular la distancia en centimetros
-  distancia = (duracion/2) / 29.1;
-
-  return distancia;
-}
+UltraSonido ultrasonido(echoPin, trigPin);
 
 void setup(){
 
@@ -109,7 +92,7 @@ void loop(){
      Serial.println ( " centimetros.");
      Serial.println ( "Deteniendo motores");
 
-     motor.FrenoM();
+     motor.Freno();
 
      Serial.println ( "Revisando a que lado voy:");
 
