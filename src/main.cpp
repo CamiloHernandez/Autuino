@@ -17,8 +17,8 @@ const int Pin_Motor_B2 = A1;
 
 
 // Pines del sensor ultrasonido
-const int trigPin = A4;
-const int echoPin = A5;
+int trigPin = A4;
+int echoPin = A5;
 
 // Variables del ultrasonido
 unsigned int duracion, distancia_frontal, distancia_izq, distancia_der, distancia;
@@ -78,7 +78,7 @@ void loop(){
   motor.writeMotor('A', 225, true);
 
   // Medimos que tan lejos esta el auto de llegar a un objeto
-  distancia_frontal = UltraSonido();
+  distancia_frontal = ultrasonido.Mirar();
 
 
      // Cuando el auto se acerque a un objeto:
@@ -100,13 +100,13 @@ void loop(){
     // Giramos el servo del ultrasonido hacia la derecha para medir la distancia
      servo.write(Angulo_der);
      delay(500);
-     distancia_der = UltraSonido();
+     distancia_der = ultrasonido.Mirar();
 
 
     // Giramos el servo del ultrasonido hacia la izquierda para medir la distancia
      servo.write(Angulo_izq);
      delay(500);
-     distancia_izq = UltraSonido();
+     distancia_izq = ultrasonido.Mirar();
 
 
     // Devolvemos el servo al centro

@@ -8,9 +8,10 @@ class UltraSonido
   public:
     UltraSonido(int echoPin, int trigPin);
     int Mirar();
+
   private:
-     int echoPin;
-     int trigPin;
+     int _echoPin;
+     int _trigPin;
      float duracion;
      float distancia;
 };
