@@ -2,11 +2,10 @@
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\variants\standard
 -IC:\Users\oguer\Documents\GitHub\Autuino\src
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\libraries\Servo\src
--IC:\Users\oguer\Documents\GitHub\Autuino\lib\Autuino
 -IC:\Users\oguer\Documents\GitHub\Autuino\lib\UltraSonido
+-IC:\Users\oguer\Documents\GitHub\Autuino\lib\Autuino
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\libraries\Firmata
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\libraries\Firmata\utility
--IC:\Users\oguer\Documents\GitHub\Autuino\lib\ConMotor
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\libraries\__cores__\arduino\EEPROM\src
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\libraries\__cores__\arduino\HID\src
 -IC:\Users\oguer\.platformio\packages\framework-arduinoavr\libraries\__cores__\arduino\SPI\src
