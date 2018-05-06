@@ -20,6 +20,9 @@ const int Pin_Motor_B2 = A1;
 int trigPin = A4;
 int echoPin = A5;
 
+//Pines del Servo
+int Pin_Servo = 3;
+
 // Variables del ultrasonido
 unsigned int duracion, distancia_frontal, distancia_izq, distancia_der, distancia;
 
@@ -49,7 +52,7 @@ UltraSonido ultrasonido(echoPin, trigPin);
 void setup(){
 
      //Se agrega el Servo
-     servo.attach(3);
+     servo.attach(Pin_Servo);
 
      // Iniciando serial
     Serial.begin(9600);
