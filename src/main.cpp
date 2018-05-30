@@ -51,24 +51,24 @@ UltraSonido ultrasonido(echoPin, trigPin);
 
 void setup(){
 
-     //Se agrega el Servo
-     servo.attach(Pin_Servo);
+        //Se agrega el Servo
+        servo.attach(Pin_Servo);
 
-     // Iniciando serial
-    Serial.begin(9600);
+        // Iniciando serial
+        Serial.begin(9600);
 
-    motor.writeMotor('B', 225, true);
-    motor.writeMotor('A', 225, true);
+        motor.writeMotor('B', 225, true);
+        motor.writeMotor('A', 225, true);
 
-    // Declaración sobre E/S de los pines
-    pinMode(trigPin, OUTPUT);
-    pinMode(echoPin, INPUT);
+        // Declaración sobre E/S de los pines
+        pinMode(trigPin, OUTPUT);
+        pinMode(echoPin, INPUT);
 
-    //Moviendo el Servo a la posición inicial
-    servo.write(Angulo_cen);
+        //Moviendo el Servo a la posición inicial
+        servo.write(Angulo_cen);
 
-    //Mensaje de bienvenida
-    Serial.println("AOK");
+        //Mensaje de bienvenida
+        Serial.println("AOK");
 
 }
 
@@ -76,85 +76,85 @@ void setup(){
 
 void loop(){
 
-  //Iniciamos por defecto los motores en la velocidad maxima y dirección frontal
-  motor.writeMotor('B', 225, true);
-  motor.writeMotor('A', 225, true);
+        //Iniciamos por defecto los motores en la velocidad maxima y dirección frontal
+        motor.writeMotor('B', 225, true);
+        motor.writeMotor('A', 225, true);
 
-  // Medimos que tan lejos esta el auto de llegar a un objeto
-  distancia_frontal = ultrasonido.Mirar();
-
-
-     // Cuando el auto se acerque a un objeto:
-    if (distancia_frontal < distancia_para_giro){
-
-     // Anunciamos por serial la proximidad
-     Serial.println ();
-     Serial.println ( "-----------------------------------------------------");
-     Serial.print ("Obstaculo detectedo a " );
-     Serial.print (distancia_frontal);
-     Serial.println ( " centimetros.");
-     Serial.println ( "Deteniendo motores");
-
-     motor.Freno();
-
-     Serial.println ( "Revisando a que lado voy:");
+        // Medimos que tan lejos esta el auto de llegar a un objeto
+        distancia_frontal = ultrasonido.Mirar();
 
 
-    // Giramos el servo del ultrasonido hacia la derecha para medir la distancia
-     servo.write(Angulo_der);
-     delay(500);
-     distancia_der = ultrasonido.Mirar();
+        // Cuando el auto se acerque a un objeto:
+        if (distancia_frontal < distancia_para_giro) {
+
+                // Anunciamos por serial la proximidad
+                Serial.println ();
+                Serial.println ( "-----------------------------------------------------");
+                Serial.print ("Obstaculo detectedo a " );
+                Serial.print (distancia_frontal);
+                Serial.println ( " centimetros.");
+                Serial.println ( "Deteniendo motores");
+
+                motor.Freno();
+
+                Serial.println ( "Revisando a que lado voy:");
 
 
-    // Giramos el servo del ultrasonido hacia la izquierda para medir la distancia
-     servo.write(Angulo_izq);
-     delay(500);
-     distancia_izq = ultrasonido.Mirar();
+                // Giramos el servo del ultrasonido hacia la derecha para medir la distancia
+                servo.write(Angulo_der);
+                delay(500);
+                distancia_der = ultrasonido.Mirar();
 
 
-    // Devolvemos el servo al centro
-     delay(500);
-     servo.write(Angulo_cen);
+                // Giramos el servo del ultrasonido hacia la izquierda para medir la distancia
+                servo.write(Angulo_izq);
+                delay(500);
+                distancia_izq = ultrasonido.Mirar();
 
-       if(distancia_der>distancia_izq){
 
-           Serial.print ( "El lado derecho esta mas despejado, girando. (");
-           Serial.print (distancia_der);
-           Serial.println ( " centimetros).");
+                // Devolvemos el servo al centro
+                delay(500);
+                servo.write(Angulo_cen);
 
-           // Hacemos funcionar solo uno de los motores para girar
-           motor.writeMotor('B',0,false);
-           motor.writeMotor('A',255,false);
+                if(distancia_der>distancia_izq) {
 
-           // Le damos tiempo para que gire
-           delay(Tiempo_de_giro);
+                        Serial.print ( "El lado derecho esta mas despejado, girando. (");
+                        Serial.print (distancia_der);
+                        Serial.println ( " centimetros).");
 
-           // Reiniciamos los valores
-           distancia_der = 0;
-           distancia_izq = 0;
-       }
+                        // Hacemos funcionar solo uno de los motores para girar
+                        motor.writeMotor('B',0,false);
+                        motor.writeMotor('A',255,false);
 
-       if(distancia_der<distancia_izq){
+                        // Le damos tiempo para que gire
+                        delay(Tiempo_de_giro);
 
-         Serial.print ( "El lado izquierdo esta mas despejado, girando. (");
-         Serial.print (distancia_izq);
-         Serial.println ( " centimetros).");
+                        // Reiniciamos los valores
+                        distancia_der = 0;
+                        distancia_izq = 0;
+                }
 
-         // Hacemos funcionar solo uno de los motores para girar
-         motor.writeMotor('A',0,true);
-         motor.writeMotor('B',255,false);
+                if(distancia_der<distancia_izq) {
 
-         // Le damos tiempo para que gire
-         delay(Tiempo_de_giro);
+                        Serial.print ( "El lado izquierdo esta mas despejado, girando. (");
+                        Serial.print (distancia_izq);
+                        Serial.println ( " centimetros).");
 
-         // Reiniciamos los valores
-         distancia_der = 0;
-         distancia_izq = 0;
-       }
+                        // Hacemos funcionar solo uno de los motores para girar
+                        motor.writeMotor('A',0,true);
+                        motor.writeMotor('B',255,false);
 
-       Serial.println ( "-----------------------------------------------------");
+                        // Le damos tiempo para que gire
+                        delay(Tiempo_de_giro);
 
-    }
+                        // Reiniciamos los valores
+                        distancia_der = 0;
+                        distancia_izq = 0;
+                }
+
+                Serial.println ( "-----------------------------------------------------");
+
+        }
 
 }
 
