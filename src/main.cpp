@@ -46,7 +46,6 @@ Autuino motor(Pin_Motor_A1, Pin_Motor_A2, Pin_Motor_B1, Pin_Motor_B2);
 Servo servo;
 
 // Iniciando la librería UltraSonido
-
 UltraSonido ultrasonido(echoPin, trigPin);
 
 void setup(){
@@ -57,8 +56,8 @@ void setup(){
         // Iniciando serial
         Serial.begin(9600);
 
-        motor.writeMotor('B', 225, true);
-        motor.writeMotor('A', 225, true);
+        motor.writeMotor('B', 225);
+        motor.writeMotor('A', 225);
 
         // Declaración sobre E/S de los pines
         pinMode(trigPin, OUTPUT);
@@ -77,8 +76,8 @@ void setup(){
 void loop(){
 
         //Iniciamos por defecto los motores en la velocidad maxima y dirección frontal
-        motor.writeMotor('B', 225, true);
-        motor.writeMotor('A', 225, true);
+        motor.writeMotor('B', 225);
+        motor.writeMotor('A', 225);
 
         // Medimos que tan lejos esta el auto de llegar a un objeto
         distancia_frontal = ultrasonido.Mirar();
@@ -123,8 +122,8 @@ void loop(){
                         Serial.println ( " centimetros).");
 
                         // Hacemos funcionar solo uno de los motores para girar
-                        motor.writeMotor('B',0,false);
-                        motor.writeMotor('A',255,false);
+                        motor.writeMotor('B',0);
+                        motor.writeMotor('A',255);
 
                         // Le damos tiempo para que gire
                         delay(Tiempo_de_giro);
@@ -141,8 +140,8 @@ void loop(){
                         Serial.println ( " centimetros).");
 
                         // Hacemos funcionar solo uno de los motores para girar
-                        motor.writeMotor('A',0,true);
-                        motor.writeMotor('B',255,false);
+                        motor.writeMotor('A',0);
+                        motor.writeMotor('B',255);
 
                         // Le damos tiempo para que gire
                         delay(Tiempo_de_giro);
